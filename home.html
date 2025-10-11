@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Welcome to Pharmacy Application</h1>
-    <h2>Change</h2>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap 4 Toggle Sidebar</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <!-- Toggle Button -->
+    <button class="btn btn-primary toggle-btn" id="toggleBtn">☰</button>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <a href="#" class="activeLink">🏠 Dashboard</a>
+      <a href="Medicine/index.html">👤 Medicine</a>
+      <a href="#">⚙️ Settings</a>
+      <a href="#">🚪 Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content">
+      <div class="container">
+        <h2>Welcome Admin to Dashboard</h2>
+      </div>
+    </div>
+
+    <!-- Bootstrap 4 JS + jQuery + Popper -->
+    <script src="bootstrap/jquery-3.2.1.slim.min.js"></script>
+    <script src="bootstrap/popper.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="script/helper.js"></script>
+  </body>
 </html>

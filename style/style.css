@@ -1,0 +1,54 @@
+body {
+    overflow-x: hidden;
+}
+
+/* Sidebar style */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #343a40;
+    color: white;
+    padding-top: 60px;
+    transition: all 0.3s ease;
+}
+
+#sidebar a {
+    color: white;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    background-color: #495057;
+}
+
+/* Hide sidebar */
+#sidebar.hidden {
+    left: -250px;
+}
+
+/* Content area */
+#content {
+    margin-left: 250px;
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+#content.full {
+    margin-left: 0;
+}
+
+/* Toggle button */
+.toggle-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+}
+.activeLink{
+    background-color: lightblue;
+}
