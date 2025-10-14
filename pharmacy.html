@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap 4 Toggle Sidebar</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <!-- Toggle Button -->
+    <button class="btn btn-primary toggle-btn" id="toggleBtn">☰</button>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <a href="home.html">🏠 Dashboard</a>
+      <a href="Medicine/index.html">👤 Medicine</a>
+      <a href="#" class="activeLink">🏠 Pharamcy</a>
+      <a href="#">🚪 Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content">
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <h2>Pharamcy Page</h2>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Sr.</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Discount</th>
+                  <th>Sub Total</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="search1"
+                      oninput="medicineSearch(1)"
+                    />
+                    <div id="searchedItems1"></div>
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" />
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" />
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" />
+                  </td>
+                  <td>
+                    <b>+</b>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 4 JS + jQuery + Popper -->
+    <script src="bootstrap/jquery-3.2.1.slim.min.js"></script>
+    <script src="bootstrap/popper.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="script/helper.js"></script>
+    <script>
+      function medicineSearch(index) {
+        let searchVal = document.querySelector("#search" + index).value;
+        let allMedicine = localStorage.getItem("allMedicines");
+        let medicineData = JSON.parse(allMedicine);
+        let searchArr = [];
+        medicineData.forEach((i) => {
+          if (
+            searchVal &&
+            searchVal.length > 1 &&
+            i.newName.toLowerCase().includes(searchVal.toLowerCase())
+          ) {
+            searchArr.push(i);
+          }
+        });
+        document.querySelector("#searchedItems" + index).innerHTML = "";
+        searchArr.forEach((i) => {
+          let p = document.createElement("p");
+          p.innerHTML = i.newName;
+          p.addEventListener("click", () => setSearchInpText(i.newName, index));
+          document.querySelector("#searchedItems" + index).appendChild(p);
+        });
+      }
+      function setSearchInpText(text, index) {
+        document.querySelector("#search" + index).value = text;
+        document.querySelector("#searchedItems" + index).innerHTML = "";
+      }
+    </script>
+  </body>
+</html>
