@@ -23,14 +23,80 @@
     <!-- Main Content -->
     <div id="content">
       <div class="container">
-        <h2>Medicine</h2>
+        <div class="row">
+          <div class="col-2">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">upload</button>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Formula</th>
+                <th>Price</th>
+                <th>Company</th>
+                <th>Expiry Date</th>
+              </tr>
+            </thead>
+            <tbody id="rowCard">
+              
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Medicine Upload</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <label for="">Name</label>
+            <input class="form-control" type="text" id="medName" />
+          </div>
+          <div class="col-6">
+            <label for="">Formula</label>
+            <input class="form-control" type="text" id="medFormula" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="">Price</label>
+            <input class="form-control" type="text" id="medPrice" />
+          </div>
+          <div class="col-6">
+            <label for="">Company</label>
+            <input class="form-control" type="text" id="medCompany" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="">Expiry Date</label>
+            <input class="form-control" type="text" id="expiryDate" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveCard">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
     <!-- Bootstrap 4 JS + jQuery + Popper -->
     <script src="../bootstrap/jquery-3.2.1.slim.min.js"></script>
     <script src="../bootstrap/popper.min.js"></script>
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="../script/helper.js"></script>
+    <script src="medicine.js"></script>
   </body>
 </html>
