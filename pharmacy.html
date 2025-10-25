@@ -40,9 +40,9 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
+              <tbody id="tableBody">
+                <tr class="trLength">
+                  <!-- <td>1</td> -->
                   <td>
                     <input
                       type="text"
@@ -53,19 +53,39 @@
                     <div id="searchedItems1"></div>
                   </td>
                   <td>
-                    <input type="number" class="form-control" />
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="price1"
+                      readonly
+                    />
                   </td>
                   <td>
-                    <input type="number" class="form-control" />
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="qty1"
+                      oninput="calculateSubTotal(1)"
+                    />
                   </td>
                   <td>
-                    <input type="text" class="form-control" />
+                    <input
+                      type="number"
+                      oninput="checkValue(1), calculateDiscount(1)"
+                      class="form-control"
+                      id="discount1"
+                    />
                   </td>
                   <td>
-                    <input type="text" class="form-control" />
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="subtotal1"
+                      readonly
+                    />
                   </td>
                   <td>
-                    <b>+</b>
+                    <b onclick="addMore()">+</b>
                   </td>
                 </tr>
               </tbody>
@@ -99,13 +119,97 @@
         searchArr.forEach((i) => {
           let p = document.createElement("p");
           p.innerHTML = i.newName;
-          p.addEventListener("click", () => setSearchInpText(i.newName, index));
+          p.addEventListener("click", () => setSearchInpText(i, index));
           document.querySelector("#searchedItems" + index).appendChild(p);
         });
       }
-      function setSearchInpText(text, index) {
-        document.querySelector("#search" + index).value = text;
+      function setSearchInpText(obj, index) {
+        document.querySelector("#search" + index).value = obj.newName;
+        document.querySelector("#price" + index).value = obj.newPrice;
         document.querySelector("#searchedItems" + index).innerHTML = "";
+      }
+      function calculateSubTotal(index) {
+        let medPrice = document.querySelector("#price" + index).value;
+        let medQty = document.querySelector("#qty" + index).value;
+        let subtotal = Number(medPrice) * Number(medQty);
+        document.querySelector("#subtotal" + index).value = subtotal;
+      }
+      function calculateDiscount(index) {
+        let medPrice = document.querySelector("#price" + index).value;
+        let medQty = document.querySelector("#qty" + index).value;
+        let totalPrice = Number(medPrice) * Number(medQty);
+        let discount = document.getElementById("discount" + index);
+        let subtotal = document.querySelector("#subtotal" + index);
+        if (discount.value) {
+          let calDiscount = (Number(discount.value) / 100) * Number(totalPrice); // percentage calculation
+          subtotal.value = totalPrice - calDiscount;
+        } else {
+          calculateSubTotal(index);
+        }
+      }
+      function checkValue(index) {
+        const value = document.getElementById("discount" + index).value;
+        if (value > 10) {
+          alert("Max Discount is 10%");
+          document.getElementById("discount" + index).value = 10;
+        }
+      }
+      function addMore(){
+        let trLength = document.querySelectorAll('.trLength');
+        let index = trLength.length;
+        
+         let html = ` <tr class="trLength">
+                  <td class="removeTr${index}">${index + 1}</td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="search1"
+                      oninput="medicineSearch(1)"
+                    />
+                    <div id="searchedItems1"></div>
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="price1"
+                      readonly
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="qty1"
+                      oninput="calculateSubTotal(1)"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      oninput="checkValue(1), calculateDiscount(1)"
+                      class="form-control"
+                      id="discount1"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="subtotal1"
+                      readonly
+                    />
+                  </td>
+                  <td>
+                    <b onclick="DelMore(${index})">-</b>
+                  </td>
+                </tr>`;
+                document.querySelector("#tableBody").insertAdjacentHTML("beforeend",html)
+
+      }
+      function DelMore(i){
+     document.querySelector(".removeTr" + i).parentElement.remove();
       }
     </script>
   </body>
