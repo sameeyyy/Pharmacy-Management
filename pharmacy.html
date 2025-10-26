@@ -42,7 +42,7 @@
               </thead>
               <tbody id="tableBody">
                 <tr class="trLength">
-                  <!-- <td>1</td> -->
+                  <td>1</td>
                   <td>
                     <input
                       type="text"
@@ -91,6 +91,28 @@
               </tbody>
             </table>
           </div>
+          <div class="card-footer text-right">
+            <div class="row">
+              <div class="col-md-8"></div>
+              <div class="col-md-4">
+                <table class="table">
+                  <tr>
+                    <th>Total</th>
+                    <td id="total">0.00</td>
+                  </tr>
+                  <tr>
+                    <th>Discount</th>
+                    <td id="total_discount">0.00</td>
+                  </tr>
+                  <tr>
+                    <th>Net Total</th>
+                    <td id="net_total">0.00</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <button class="btn btn-primary">Generate Bill</button>
+          </div>
         </div>
       </div>
     </div>
@@ -133,6 +155,7 @@
         let medQty = document.querySelector("#qty" + index).value;
         let subtotal = Number(medPrice) * Number(medQty);
         document.querySelector("#subtotal" + index).value = subtotal;
+        calculateNet();
       }
       function calculateDiscount(index) {
         let medPrice = document.querySelector("#price" + index).value;
@@ -146,6 +169,7 @@
         } else {
           calculateSubTotal(index);
         }
+        calculateNet();
       }
       function checkValue(index) {
         const value = document.getElementById("discount" + index).value;
@@ -154,26 +178,46 @@
           document.getElementById("discount" + index).value = 10;
         }
       }
-      function addMore(){
-        let trLength = document.querySelectorAll('.trLength');
+      function calculateNet() {
+        let count = document.querySelectorAll(".trLength").length;
+        let total = 0;
+        let totalDiscount = 0;
+        for (let i = 1; i <= count; i++) {
+          let price = document.querySelector("#price" + i).value;
+          let qty = document.querySelector("#qty" + i).value;
+          total = total + Number(price) * Number(qty);
+          let discount = document.querySelector("#discount" + i).value;
+          let calDiscount =
+            (Number(discount) / 100) * (Number(price) * Number(qty));
+          totalDiscount = totalDiscount + Number(calDiscount);
+        }
+        document.querySelector("#total").innerHTML = total;
+        document.querySelector("#total_discount").innerHTML = totalDiscount;
+        document.querySelector("#net_total").innerHTML = total - totalDiscount;
+        console.log(total, totalDiscount);
+      }
+
+      // Add More section
+      function addMore() {
+        let trLength = document.querySelectorAll(".trLength");
         let index = trLength.length;
-        
-         let html = ` <tr class="trLength">
+
+        let html = ` <tr class="trLength">
                   <td class="removeTr${index}">${index + 1}</td>
                   <td>
                     <input
                       type="text"
                       class="form-control"
-                      id="search1"
-                      oninput="medicineSearch(1)"
+                      id="search${index + 1}"
+                      oninput="medicineSearch(${index + 1})"
                     />
-                    <div id="searchedItems1"></div>
+                    <div id="searchedItems${index + 1}"></div>
                   </td>
                   <td>
                     <input
                       type="number"
                       class="form-control"
-                      id="price1"
+                      id="price${index + 1}"
                       readonly
                     />
                   </td>
@@ -181,23 +225,25 @@
                     <input
                       type="number"
                       class="form-control"
-                      id="qty1"
-                      oninput="calculateSubTotal(1)"
+                      id="qty${index + 1}"
+                      oninput="calculateSubTotal(${index + 1})"
                     />
                   </td>
                   <td>
                     <input
                       type="number"
-                      oninput="checkValue(1), calculateDiscount(1)"
+                      oninput="checkValue(${index + 1}), calculateDiscount(${
+          index + 1
+        })"
                       class="form-control"
-                      id="discount1"
+                      id="discount${index + 1}"
                     />
                   </td>
                   <td>
                     <input
                       type="number"
                       class="form-control"
-                      id="subtotal1"
+                      id="subtotal${index + 1}"
                       readonly
                     />
                   </td>
@@ -205,11 +251,12 @@
                     <b onclick="DelMore(${index})">-</b>
                   </td>
                 </tr>`;
-                document.querySelector("#tableBody").insertAdjacentHTML("beforeend",html)
-
+        document
+          .querySelector("#tableBody")
+          .insertAdjacentHTML("beforeend", html);
       }
-      function DelMore(i){
-     document.querySelector(".removeTr" + i).parentElement.remove();
+      function DelMore(i) {
+        document.querySelector(".removeTr" + i).parentElement.remove();
       }
     </script>
   </body>
