@@ -111,7 +111,9 @@
                 </table>
               </div>
             </div>
-            <button class="btn btn-primary">Generate Bill</button>
+            <button class="btn btn-primary" onclick="generateBill()">
+              Generate Bill
+            </button>
           </div>
         </div>
       </div>
@@ -197,6 +199,36 @@
         console.log(total, totalDiscount);
       }
 
+      function generateBill() {
+        let count = document.querySelectorAll(".trLength").length;
+        let items = [];
+        for (let i = 1; i <= count; i++) {
+          let name = document.querySelector("#search" + i).value;
+          let price = document.querySelector("#price" + i).value;
+          let qty = document.querySelector("#qty" + i).value;
+          let discount = document.querySelector("#discount" + i).value;
+          let subtotal = document.querySelector("#subtotal" + i).value;
+          items.push({
+            name: name,
+            price: price,
+            qty: qty,
+            discount: discount,
+            subtotal: subtotal,
+          });
+        }
+        let total = document.querySelector("#total").innerText;
+        let total_discount =
+          document.querySelector("#total_discount").innerText;
+        let net_total = document.querySelector("#net_total").innerText;
+        let billData = {
+          items: items,
+          total: total,
+          total_discount: total_discount,
+          net_total: net_total,
+        };
+        localStorage.setItem("billData", JSON.stringify(billData));
+        location.href = 'bill.html';
+      }
       // Add More section
       function addMore() {
         let trLength = document.querySelectorAll(".trLength");

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style/style.css" />
+
+    <style>
+      #billDiv {
+        border: 1px solid black;
+        width: 50%;
+        height: 300px;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="billDiv">
+      <table class="table table-bordered">
+        <thead>
+          <th>Sr.</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Discount</th>
+          <th>Subtotal</th>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <table class="table">
+            <tr class="trLength">
+              <th>Total</th>
+              <td id="total">0.00</td>
+            </tr>
+            <tr>
+              <th>Discount</th>
+              <td id="total_discount">0.00</td>
+            </tr>
+            <tr>
+              <th>Net Total</th>
+              <td id="net_total">0.00</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap 4 JS + jQuery + Popper -->
+    <script src="bootstrap/jquery-3.2.1.slim.min.js"></script>
+    <script src="bootstrap/popper.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="script/helper.js"></script>
+    <script>
+      function printBill() {
+        let billData = JSON.parse(localStorage.getItem("billData"));
+        billData.items.forEach((i, index) => {
+          let html = `
+                    <tr class="trLength">
+                        <td>${index + 1}</td>
+                        <td>${i.name}</td>
+                        <td>${i.price}</td>
+                        <td>${i.qty}</td>
+                        <td>${i.discount}</td>
+                        <td>${i.subtotal}</td>
+                    </tr>`;
+          document
+            .querySelector("#tbody")
+            .insertAdjacentHTML("beforeend", html);
+        });
+        document.querySelector(`#total`).innerHTML = billData.total;
+        document.querySelector(`#total_discount`).innerHTML =
+          billData.total_discount;
+        document.querySelector(`#net_total`).innerHTML = billData.net_total;
+      }
+      printBill();
+    </script>
+  </body>
+</html>
