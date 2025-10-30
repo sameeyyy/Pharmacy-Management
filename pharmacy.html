@@ -200,6 +200,7 @@
       }
 
       function generateBill() {
+        alert("erer");
         let count = document.querySelectorAll(".trLength").length;
         let items = [];
         for (let i = 1; i <= count; i++) {
@@ -214,6 +215,7 @@
             qty: qty,
             discount: discount,
             subtotal: subtotal,
+            
           });
         }
         let total = document.querySelector("#total").innerText;
@@ -226,8 +228,20 @@
           total_discount: total_discount,
           net_total: net_total,
         };
-        localStorage.setItem("billData", JSON.stringify(billData));
-        location.href = 'bill.html';
+        let billNo = 1;
+        let oldBillData = localStorage.getItem("billData");
+        if (oldBillData) {
+          let parsedOldData = JSON.parse(oldBillData);
+          billNo = Object.keys(parsedOldData).length + 1;
+          parsedOldData[[billNo]] = billData;
+          localStorage.setItem("billData", JSON.stringify(parsedOldData));
+        } else {
+          localStorage.setItem(
+            "billData",
+            JSON.stringify({ [billNo]: billData })
+          );
+        }
+        location.href = "bill.html?billNo=" + billNo;
       }
       // Add More section
       function addMore() {

@@ -58,7 +58,11 @@
     <script>
       function printBill() {
         let billData = JSON.parse(localStorage.getItem("billData"));
-        billData.items.forEach((i, index) => {
+        let params = new URLSearchParams(window.location.search);
+        let billNo = params.get("billNo");
+        console.log(billNo);
+
+        billData[billNo].items.forEach((i, index) => {
           let html = `
                     <tr class="trLength">
                         <td>${index + 1}</td>
@@ -72,10 +76,10 @@
             .querySelector("#tbody")
             .insertAdjacentHTML("beforeend", html);
         });
-        document.querySelector(`#total`).innerHTML = billData.total;
+        document.querySelector(`#total`).innerHTML = billData[billNo].total;
         document.querySelector(`#total_discount`).innerHTML =
-          billData.total_discount;
-        document.querySelector(`#net_total`).innerHTML = billData.net_total;
+          billData[billNo].total_discount;
+        document.querySelector(`#net_total`).innerHTML = billData[billNo].net_total;
       }
       printBill();
     </script>
