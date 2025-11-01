@@ -7,6 +7,239 @@
     <!-- Bootstrap 4 CSS -->
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style/style.css" />
+    <style>
+      /* ===========================
+   🌿 GLOBAL STYLES
+=========================== */
+body {
+  background: linear-gradient(145deg, #e8f9f0, #c3f0dc);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 30px;
+  color: #2c3e50;
+  min-height: 100vh;
+}
+
+/* Smooth transitions everywhere */
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+/* ===========================
+   💊 CARD CONTAINER
+=========================== */
+.container {
+  max-width: 1150px;
+  margin: auto;
+}
+
+.card {
+  background: #fdfdfd;
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.08),
+              -5px -5px 15px rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+  animation: fadeIn 0.7s ease;
+}
+
+/* ===========================
+   🩺 CARD HEADER
+=========================== */
+.card-header {
+  background: linear-gradient(90deg, #00c896, #00b4d8);
+  color: white;
+  padding: 25px;
+  text-align: center;
+  border-bottom: 4px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-header h2 {
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 1px;
+  margin: 0;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ===========================
+   📋 TABLE STYLING
+=========================== */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.table thead {
+  background: linear-gradient(135deg, #00c896, #00b4d8);
+  color: #fff;
+}
+
+.table th,
+.table td {
+  text-align: center;
+  padding: 14px 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.table tbody tr {
+  background: #ffffff;
+}
+
+.table tbody tr:hover {
+  background: #e8f9f0;
+  transform: scale(1.01);
+}
+
+/* ===========================
+   🔢 FORM INPUTS
+=========================== */
+.form-control {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid #c7ecee;
+  border-radius: 10px;
+  outline: none;
+  background: #fdfdfd;
+  font-size: 14px;
+  color: #333;
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.05),
+              inset -2px -2px 6px rgba(255, 255, 255, 0.8);
+}
+
+.form-control:focus {
+  border-color: #00b4d8;
+  box-shadow: 0 0 8px rgba(0, 180, 216, 0.4);
+}
+
+/* ===========================
+   🔍 SEARCH DROPDOWN
+=========================== */
+[id^="searchedItems"] {
+  background: #fff;
+  border: 1px solid #bde8d6;
+  border-radius: 10px;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  width: 90%;
+  z-index: 100;
+  display: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+[id^="searchedItems"] div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+[id^="searchedItems"] div:hover {
+  background-color: #d9f7ea;
+}
+
+/* ===========================
+   ➕ ADD ROW BUTTON
+=========================== */
+b {
+  font-size: 22px;
+  color: #00b4d8;
+  cursor: pointer;
+  background: #e0f7f1;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+b:hover {
+  background: #00b4d8;
+  color: white;
+  transform: rotate(90deg) scale(1.2);
+}
+
+/* ===========================
+   🧮 CARD FOOTER
+=========================== */
+.card-footer {
+  padding: 25px;
+  background: #f6fffa;
+  border-top: 2px dashed #c3f0dc;
+}
+
+.card-footer table {
+  width: 100%;
+  font-size: 15px;
+}
+
+.card-footer th {
+  text-align: left;
+  font-weight: 600;
+  color: #006b5a;
+}
+
+.card-footer td {
+  text-align: right;
+  color: #1b4332;
+}
+
+/* ===========================
+   🔘 BUTTON STYLING
+=========================== */
+.btn {
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #00b4d8, #00c896);
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 180, 216, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #00a2c3, #00ad86);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   🌙 ANIMATIONS
+=========================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   📱 RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  .card-header h2 {
+    font-size: 22px;
+  }
+
+  .table th, .table td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+}
+
+    </style>
   </head>
   <body>
     <!-- Toggle Button -->
@@ -17,6 +250,7 @@
       <a href="home.html">🏠 Dashboard</a>
       <a href="Medicine/index.html">👤 Medicine</a>
       <a href="#" class="activeLink">🏠 Pharamcy</a>
+      <a href="bill_list.html">🏠 Bill List</a>
       <a href="#">🚪 Logout</a>
     </div>
 
@@ -107,6 +341,16 @@
                   <tr>
                     <th>Net Total</th>
                     <td id="net_total">0.00</td>
+                  </tr>
+                  <tr>
+                    <th>Customer</th>
+                    <td>
+                      <input
+                        type="text"
+                        id="customer_name"
+                        class="form-control"
+                      />
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -200,7 +444,6 @@
       }
 
       function generateBill() {
-        alert("erer");
         let count = document.querySelectorAll(".trLength").length;
         let items = [];
         for (let i = 1; i <= count; i++) {
@@ -215,18 +458,21 @@
             qty: qty,
             discount: discount,
             subtotal: subtotal,
-            
           });
         }
         let total = document.querySelector("#total").innerText;
         let total_discount =
           document.querySelector("#total_discount").innerText;
         let net_total = document.querySelector("#net_total").innerText;
+        let customer = document.querySelector("#customer_name").value;
+        let now = new Date();
         let billData = {
           items: items,
           total: total,
           total_discount: total_discount,
           net_total: net_total,
+          customer_name: customer,
+          created_at: now.toLocaleString(),
         };
         let billNo = 1;
         let oldBillData = localStorage.getItem("billData");

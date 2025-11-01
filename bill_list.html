@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap 4 Toggle Sidebar</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <!-- Toggle Button -->
+    <button class="btn btn-primary toggle-btn" id="toggleBtn">☰</button>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <a href="#" class="activeLink">🏠 Dashboard</a>
+      <a href="Medicine/index.html">👤 Medicine</a>
+      <a href="pharmacy.html">🏠 Pharamcy</a>
+      <a href="bill_list.html">🏠 Bill List</a>
+      <a href="#">🚪 Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content">
+      <div class="container">
+        <h2>Bill List</h2>
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <th>Bill No</th>
+                <th>Customer Name</th>
+                <th>Bill Date</th>
+                <th>Action</th>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 4 JS + jQuery + Popper -->
+    <script src="bootstrap/jquery-3.2.1.slim.min.js"></script>
+    <script src="bootstrap/popper.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="script/helper.js"></script>
+    <script>
+      function billList() {
+        let allBills = JSON.parse(localStorage.getItem("billData"));
+        console.log(allBills);
+        let keys = Object.keys(allBills);
+        console.log(keys);
+
+        for (let i = 1; i <= keys.length; i++) {
+          let html = `
+                <tr>
+                    <td>${i}</td>
+                    <td>${allBills[i].customer_name}</td>
+                    <td>${allBills[i].created_at}</td>
+                    <td>
+                        <a href="bill.html?billNo=${i}" target="_blank">Open Bill</a>    
+                    </td>
+                </tr>
+            `;
+          document
+            .querySelector("#tbody")
+            .insertAdjacentHTML("beforeend", html);
+        }
+      }
+      billList();
+    </script>
+  </body>
+</html>
