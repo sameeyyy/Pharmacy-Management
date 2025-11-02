@@ -7,6 +7,157 @@
     <!-- Bootstrap 4 CSS -->
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style/style.css" />
+
+    <style>
+     /* ====== Pharmacy Bill Section – Elegant Center Design ====== */
+
+body {
+  background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* --- Bill Container --- */
+#billDiv {
+  width: 90%;
+  max-width: 900px;
+  background: #ffffff;
+  margin-top: 50px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 35px 40px;
+  transition: all 0.3s ease-in-out;
+  border-top: 6px solid #00796b;
+}
+
+#billDiv:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Main Bill Table --- */
+#billDiv .table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fafafa;
+}
+
+#billDiv .table thead {
+  background: linear-gradient(90deg, #009688, #00796b);
+  color: #fff;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#billDiv .table th,
+#billDiv .table td {
+  text-align: center;
+  padding: 12px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 15px;
+}
+
+#billDiv .table tbody tr:hover {
+  background-color: #e0f2f1;
+  transition: 0.3s;
+}
+
+/* --- Totals Section --- */
+#billDiv .row {
+  margin-top: 25px;
+  align-items: flex-end;
+}
+
+#billDiv .col-md-4 {
+  background: linear-gradient(145deg, #f9fbe7, #e8f5e9);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 10px;
+}
+
+#billDiv .col-md-4 .table {
+  background-color: transparent;
+  border: none;
+}
+
+#billDiv .col-md-4 .table th {
+  width: 60%;
+  text-align: left;
+  color: #004d40;
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 10px 5px;
+}
+
+#billDiv .col-md-4 .table td {
+  text-align: right;
+  color: #2e7d32;
+  font-weight: 700;
+  background: none;
+  border: none;
+  padding: 10px 5px;
+}
+
+/* --- Special Highlight for Net Total --- */
+#billDiv #net_total {
+  color: #1b5e20;
+  font-size: 20px;
+  font-weight: 800;
+  text-shadow: 0px 1px 1px rgba(0,0,0,0.1);
+}
+
+/* --- Animations --- */
+@keyframes glow {
+  0% { box-shadow: 0 0 5px #81c784; }
+  50% { box-shadow: 0 0 15px #66bb6a; }
+  100% { box-shadow: 0 0 5px #81c784; }
+}
+
+#billDiv:hover {
+  animation: glow 2s infinite alternate;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  body {
+    align-items: flex-start;
+  }
+
+  #billDiv {
+    width: 95%;
+    padding: 25px 20px;
+  }
+
+  #billDiv .table th,
+  #billDiv .table td {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #billDiv .col-md-4 {
+    margin-top: 15px;
+  }
+}
+
+    </style>
+    <style>
+      @media print {
+        #printBtn{
+          display: none;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="billDiv">
@@ -40,6 +191,7 @@
           </table>
         </div>
       </div>
+      <button class="btn btn-primary" onclick="printInvoice()" id="printBtn">Print</button>
     </div>
     <!-- Bootstrap 4 JS + jQuery + Popper -->
     <script src="bootstrap/jquery-3.2.1.slim.min.js"></script>
@@ -47,13 +199,20 @@
     <script src="bootstrap/bootstrap.min.js"></script>
     <script src="script/helper.js"></script>
     <script>
+      function printInvoice(){
+        window.print();
+      }
       function printBill() {
         let billData = JSON.parse(localStorage.getItem("billData"));
+        console.log(localStorage.getItem("billData"));
+        
         let params = new URLSearchParams(window.location.search);
         let billNo = params.get("billNo");
         console.log(billNo);
 
         billData[billNo].items.forEach((i, index) => {
+          console.log(billData[billNo].items);
+          
           let html = `
                     <tr class="trLength">
                         <td>${index + 1}</td>

@@ -7,6 +7,209 @@
     <!-- Bootstrap 4 CSS -->
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style/style.css" />
+    <style>
+      /* ===== Pharmacy System — Unified Beautiful Styling ===== */
+
+body {
+  background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* --- Main Page Layout --- */
+#content {
+  width: 90%;
+  max-width: 1100px;
+  margin-top: 50px;
+}
+
+.container {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  transition: all 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Card Styling --- */
+.card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+.card-header {
+  background: linear-gradient(90deg, #009688, #00796b);
+  color: #fff;
+  text-align: center;
+  padding: 18px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.card-body {
+  background: #fafafa;
+  padding: 25px;
+  border-radius: 0 0 12px 12px;
+}
+
+/* --- Table Styling --- */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.table thead {
+  background: linear-gradient(90deg, #26a69a, #00796b);
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+}
+
+.table th,
+.table td {
+  text-align: center;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 15px;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e0f2f1;
+  transition: 0.3s ease;
+}
+
+/* --- Inputs in Table --- */
+.form-control {
+  border: 1px solid #b2dfdb;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 6px 8px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #00796b;
+  box-shadow: 0 0 6px rgba(0, 150, 136, 0.3);
+  outline: none;
+}
+
+/* --- + Add Button --- */
+b {
+  font-size: 20px;
+  color: #00796b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+b:hover {
+  color: #004d40;
+  transform: scale(1.2);
+}
+
+/* --- Totals Table --- */
+.card-footer {
+  background: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  padding: 25px;
+  border-radius: 0 0 16px 16px;
+}
+
+.card-footer .table {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+.card-footer .table tr th {
+  width: 50%;
+  background: #00796b;
+  color: #fff;
+  text-align: left;
+}
+
+.card-footer .table tr td {
+  font-weight: 600;
+  color: #2e7d32;
+  text-align: right;
+  background: #f1f8e9;
+}
+
+/* --- Highlight Totals --- */
+#total,
+#total_discount,
+#net_total {
+  font-size: 16px;
+}
+
+#net_total {
+  color: #1b5e20;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* --- Generate Bill Button --- */
+.btn-primary {
+  background: linear-gradient(90deg, #009688, #00796b);
+  border: none;
+  padding: 10px 22px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 150, 136, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #00796b, #004d40);
+  box-shadow: 0 8px 20px rgba(0, 150, 136, 0.4);
+  transform: scale(1.05);
+}
+
+/* --- Responsive View --- */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .col-md-4 {
+    margin-top: 15px;
+  }
+}
+
+    </style>
   </head>
   <body>
     <!-- Toggle Button -->
